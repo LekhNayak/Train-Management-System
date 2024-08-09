@@ -1,5 +1,4 @@
-# Train-Management-System
-**DBMS Case Study**
+# Train-Management-System (DBMS Case Study)
 
 **Problem Statement**
 
