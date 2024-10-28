@@ -1,0 +1,131 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    width: 600px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upper-strap {
+    background-color: #208c8d;
+    color: #fff;
+    padding: 4px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.form-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Use column layout */
+    align-items: flex-start; /* Align items to the start */
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    justify-content: space-between; /* Space between elements */
+    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Space below the input group */
+}
+
+.input-inner-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group label {
+    display: flex; /* Use flex to align labels */
+    flex-direction: column; /* Stack label and input */
+    flex-basis: 30%; /* Set a fixed width for labels */
+}
+
+.route-id-input {
+    width: 60%; /* Adjust width for Route ID input */
+    padding: 8px;
+    border: 0.5px solid black;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+}
+
+.form-card .select {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-left: -20px;
+    
+}
+
+.form-card select {
+    width: 110%; /* Set width for select elements */
+    padding: 8px;
+    border: 0.5px solid black;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: -15px;
+}
+
+.form-card button {
+    padding: 10px 20px;
+    background-color: #208c8d;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-card button:hover {
+    background-color: #1f7a7b;
+}
+
+.route-id-input:focus, select:focus,
+.route-id-input:focus-visible {
+    border: 2px solid #43cea2;
+}
+
+.input-inner-group label:hover + .route-id-input,
+.input-inner-group label:focus-within .route-id-input {
+    border: 2px solid #43cea2;
+}
+
+#routeId:focus{
+    border: 2px solid #43cea2;
+}
+
+.error-message {
+    color: red;
+    font-size: 15px;
+}
+
+.success-message {
+    color: green;
+    font-size: 15px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Division</title>
+    <link rel="stylesheet" href="/css/divisionaddform.css" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="upper-strap">
+            <h4>Add Division</h4>
+        </div>
+        <div class="form-card">
+            <form id="divisionForm" action="/add-division" method="post">
+                <label for="divisionId">Division ID:</label>
+                <input type="text" id="divisionId" name="divisionId" required placeholder="Maximum 5 Characters" />
+
+                <label for="divisionName">Division Name:</label>
+                <input type="text" id="divisionName" name="divisionName" required />
+
+                <label for="zoneSelect">Zone:</label>
+                <select id="zoneSelect" name="zone">
+                    <option value="" class="option">Select a Zone</option>
+                    <!-- Dynamic options will be injected here -->
+                </select>
+
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="button-container">
+                    <button type="submit">Done</button>
+                    <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/divisionaddform.js"></script> <!-- Ensure this points to the correct JS file -->
+</body>
+</html>

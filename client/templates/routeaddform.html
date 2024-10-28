@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Route</title>
+    <link rel="stylesheet" href="/css/routeaddform.css" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="upper-strap">
+            <h4>Add Route</h4>
+        </div>
+        <div class="form-card">
+            <form id="routeForm" action="/add-route" method="post">
+                <div class="input-group">
+                    <div class="input-inner-group">
+                        <label for="routeId">Route ID:</label>
+                        <input type="number" id="routeId" name="routeId" required class="route-id-input" />
+                    </div>
+
+                    <div class="select">
+                        <div class="input-inner-group">
+                            <label for="station1Select">Station 1:</label>
+                            <select id="station1Select" name="station1">
+                                <option value="">Select a Station</option>
+                                <!-- Dynamic options will be injected here -->
+                            </select>
+                        </div>
+                        <div class="input-inner-group">
+                            <label for="station2Select">Station 2:</label>
+                            <select id="station2Select" name="station2">
+                                <option value="">Select a Station</option>
+                                <!-- Dynamic options will be injected here -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+
+                <div class="button-container">
+                    <button type="submit">Done</button>
+                    <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/routeaddform.js"></script>
+</body>
+</html>
