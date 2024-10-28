@@ -27,12 +27,14 @@ const stationRoutes = require('./routes/stationAdd');
 const zoneRoutes = require('./routes/zoneAdd');
 const divisionRoutes = require('./routes/divisionAdd');
 const routeRoutes = require('./routes/routeAdd');
+const loginAuth = require('./routes/loginAuth');
 // Routes ends
 
 app.use('/', stationRoutes);
 app.use('/', zoneRoutes);
 app.use('/', divisionRoutes);
 app.use('/', routeRoutes);
+app.use('/auth', loginAuth);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/templates/login.html'));

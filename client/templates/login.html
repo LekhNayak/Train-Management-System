@@ -4,14 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Login</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    />
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/css/login.css" />
 </head>
 <body>
@@ -20,7 +14,7 @@
             <img src="/media/ir.png" alt="Logo" class="logo" />
             <h2>Welcome to Indian Railways</h2>
             <h4>Admin Login</h4>
-            <form class="login-form" action="/auth" method="post">
+            <form class="login-form" id="loginForm" id="loginForm" action="/auth" method="post">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
                     <input type="text" id="username" required placeholder="Username" />
@@ -29,9 +23,11 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" id="password" required placeholder="Password" />
                 </div>
+                <p id="errorMessage" style="color: red;"></p> <!-- Error message element -->
                 <button type="submit">Login</button>
             </form>
         </div>
     </div>
+    <script src="/js/login.js"></script>
 </body>
 </html>
