@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Train</title>
+    <link rel="stylesheet" href="/css/trainaddform.css" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="upper-strap">
+            <h4>Add Train</h4>
+        </div>
+        <div class="form-card">
+            <form id="trainForm" action="/add-train" method="post">
+                <!-- Train Number and Name in Single Line -->
+                <div class="input-group single-line">
+                    <label for="trainno">Train No.:</label>
+                    <input type="number" id="trainno" name="trainno" class="half-width" required />
+                    
+                    <label for="trainName">Train Name:</label>
+                    <input type="text" id="trainName" name="trainName" class="wide-input" required />
+                </div>
+            
+                <!-- Train Type and Route in Single Line -->
+                <div class="input-group single-line">
+                    <label for="typeSelect">Train Type:</label>
+                    <select id="typeSelect" name="type" class="half-width">
+                        <option value="">Select a Train Type</option>
+                        <!-- Dynamic options here -->
+                    </select>
+            
+                    <label for="routeSelect">Route:</label>
+                    <select id="routeSelect" name="route" class="half-width">
+                        <option value="">Select a Route</option>
+                        <!-- Dynamic options here -->
+                    </select>
+                </div>
+            
+                <!-- Departure and Arrival in Single Line -->
+                <div class="input-group single-line">
+                    <label for="departure">Departure:</label>
+                    <input type="time" id="departure" name="departure" class="half-width" required />
+            
+                    <label for="arrival">Arrival:</label>
+                    <input type="time" id="arrival" name="arrival" class="half-width" required />
+                </div>
+            
+                <!-- Direction Radio Buttons -->
+                <div class="radio-group">
+                    <label>Direction:</label>
+                    <label>
+                        <input type="radio" name="direction" value="up" required />
+                        <span class="custom-radio"></span>
+                        Up
+                    </label>
+                    <label>
+                        <input type="radio" name="direction" value="down" required />
+                        <span class="custom-radio"></span>
+                        Down
+                    </label>
+                </div>
+                
+            
+                <!-- Error and Success Messages -->
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+            
+                <!-- Button Container -->
+                <div class="button-container">
+                    <button type="submit">Done</button>
+                    <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                </div>
+            </form>            
+        </div>
+    </div>
+    <script src="/js/trainaddform.js"></script>
+</body>
+</html>

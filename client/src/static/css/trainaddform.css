@@ -1,0 +1,166 @@
+/* Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Container and Header */
+.form-container {
+    width: 800px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upper-strap {
+    background-color: #208c8d;
+    color: #fff;
+    padding: 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Form Card */
+.form-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-top: none;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 15px; /* Add space between rows */
+}
+
+.input-group label {
+    font-weight: 500;
+    color: #333;
+}
+
+.input-group input[type="number"],
+.input-group input[type="text"],
+.input-group input[type="time"],
+.input-group select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+    border: 2px solid #43cea2;
+    outline: none;
+}
+
+/* Specific Group Layouts */
+.single-line { /* Train number and name */
+    display: flex;
+    gap: 10px;
+}
+
+.wide-input {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin: 10px 0 15px 0;
+}
+
+/* Error and Success Messages */
+.error-message {
+    color: red;
+    font-size: 15px;
+}
+
+.success-message {
+    color: green;
+    font-size: 15px;
+}
+
+/* Button Styling */
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    background-color: #208c8d;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #1f7a7b;
+}
+
+/* Hide default radio button */
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+/* Custom radio button styling */
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16.5px;
+    color: #333;
+}
+
+.radio-group .custom-radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: inline-block;
+    position: relative;
+    transition: border-color 0.3s;
+}
+
+.radio-group input[type="radio"]:checked + .custom-radio {
+    border-color: #208c8d; /* Outline color when selected */
+    background-color: #208c8d; /* Filled color when selected */
+}
+
+/* Inner dot when selected */
+.radio-group input[type="radio"]:checked + .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+}
+

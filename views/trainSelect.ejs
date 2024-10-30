@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train List</title>
+    <link rel="stylesheet" href="/css/trainSelect.css">
+</head>
+<body>
+    <h1>Train List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Train No</th>
+                <th>Train Name</th>
+                <th>Type</th>
+                <th>Route</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Direction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% trains.forEach(train => { %>
+                <tr>
+                    <td><%= train.train_no %></td>
+                    <td><%= train.name %></td>
+                    <td><%= train.type %></td>
+                    <td><%= train.route_id %></td>
+                    <td><%= train.depart %></td>
+                    <td><%= train.arrive %></td>
+                    <td><%= train.direction %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

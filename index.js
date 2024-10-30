@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, '/client/src/static')));
 app.use(express.urlencoded({ extended: true })); 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 // MySQL connection check
 db.connect(err => {
@@ -27,14 +28,18 @@ const stationRoutes = require('./routes/stationAdd');
 const zoneRoutes = require('./routes/zoneAdd');
 const divisionRoutes = require('./routes/divisionAdd');
 const routeRoutes = require('./routes/routeAdd');
+const trainRoutes = require('./routes/trainAdd');
 const loginAuth = require('./routes/loginAuth');
 // Routes ends
 
+app.use('/auth', loginAuth);
 app.use('/', stationRoutes);
 app.use('/', zoneRoutes);
 app.use('/', divisionRoutes);
 app.use('/', routeRoutes);
-app.use('/auth', loginAuth);
+app.use('/trains', trainRoutes);
+
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/templates/login.html'));

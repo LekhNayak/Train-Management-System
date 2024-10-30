@@ -3,7 +3,6 @@ const fs = require('fs');
 const db = require('../db');
 const { error } = require('console');
 
-// Get station form with zone options
 exports.getStationForm = (req, res) => {
     const query = 'SELECT zone FROM zones';
     db.query(query, (err, results) => {
