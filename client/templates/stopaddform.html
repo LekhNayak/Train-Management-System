@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stops to Route</title>
+    <link rel="stylesheet" href="/css/stopaddform.css"> <!-- Link to CSS file -->
+</head>
+<body>
+    <div class="form-container" id="form-container">
+            <div class="upper-strap">
+                <h4>Add Stops</h4>
+            </div>
+            <div class="form-card">
+                <form id="stopForm" action="/add-stop" method="post">
+                    <!-- Train Dropdown -->
+                    <label for="trainSelect">Select Train:</label>
+                    <div class="selectTrain">
+                    <select id="trainSelect" name="train">
+                        <option value="">Select Train</option>
+                        <!-- Dynamic train options will be injected here -->
+                    </select>
+
+                    <button type="button" id="addStopButton" class="add-button"><span class="plus">+</span> Add Stop</button>
+                    </div>
+
+
+                    <div id="stationRows">
+                        <div class="labels">
+                            <label for="end1">Station:</label>
+                            <label for="order1">Order:</label>
+                            <label for="arrival1">Arrival:</label>
+                            <label for="depart1">Departure:</label>
+                        </div>
+                        <div class="station-row">
+                            <input type="text" id="end1" name="end1" required disabled>
+                            <input type="number" id="order1" name="order1" required>
+                            <input type="time" id="arrival1" name="arrival1" disabled>
+                            <input type="time" id="depart1" name="depart1" required disabled>
+                        </div>
+                        <div class="station-row">
+                            <input type="text" id="end2" name="end2" required disabled>
+                            <input type="number" id="order2" name="order2" required>
+                            <input type="time" id="arrival2" name="arrival2" required disabled>
+                            <input type="time" id="depart2" name="depart2" disabled>
+                        </div>
+                    </div>
+
+                    <div class="error-message" id="errorMessage"></div>
+                    <div class="success-message" id="successMessage"></div>
+    
+                    <div class="button-container">
+                        <button type="submit">Done</button>
+                        <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+    </div>
+
+    <script src="/js/stopaddform.js"></script> <!-- Link to JavaScript file -->
+</body>
+</html>

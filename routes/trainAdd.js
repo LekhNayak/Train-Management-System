@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const trainController = require('../controllers/trainAdd');
 
-// Route to get train form
 router.get('/trainForm', trainController.getTrainForm);
-
-// Route to add train
 router.post('/add-train', trainController.addTrain);
+router.get('/trains', trainController.getTrainList);
+router.get('/stations', trainController.getStations);
+router.get('/trains/search', trainController.searchTrains);
 
 module.exports = router;

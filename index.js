@@ -29,6 +29,7 @@ const zoneRoutes = require('./routes/zoneAdd');
 const divisionRoutes = require('./routes/divisionAdd');
 const routeRoutes = require('./routes/routeAdd');
 const trainRoutes = require('./routes/trainAdd');
+const stopRoutes = require('./routes/stopAdd');
 const loginAuth = require('./routes/loginAuth');
 // Routes ends
 
@@ -37,7 +38,8 @@ app.use('/', stationRoutes);
 app.use('/', zoneRoutes);
 app.use('/', divisionRoutes);
 app.use('/', routeRoutes);
-app.use('/trains', trainRoutes);
+app.use('/', stopRoutes);
+app.use('/', trainRoutes);
 
 
 

@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train List</title>
+    <title>Train Management</title>
     <link rel="stylesheet" href="/css/trainSelect.css">
 </head>
 <body>
-    <h1>Train List</h1>
+    <h1>Train Management</h1>
+    <div>
+        <input type="text" id="trainNo" placeholder="Train No">
+        <select id="station1Select" name="station1">
+            <option value="">Select Station</option>
+            <!-- Dynamic options will be injected here -->
+        </select>
+        <span class="double-arrow" style="font-size: 30px; padding: 0 10px;">↔</span>
+        <select id="station2Select" name="station2">
+            <option value="">Select Station</option>
+            <!-- Dynamic options will be injected here -->
+        </select>
+        <button id="searchButton">Search</button>
+        <button id="addTrainButton">Add Train</button>
+        <button id="addStopButton">Add Stop</button>
+        <button id="showAllTrainsButton">Show All Trains</button>
+    </div>
+    
     <table>
         <thead>
             <tr>
@@ -15,24 +32,117 @@
                 <th>Train Name</th>
                 <th>Type</th>
                 <th>Route</th>
+                <th>Start</th>
+                <th>Destination</th>
                 <th>Departure</th>
                 <th>Arrival</th>
                 <th>Direction</th>
             </tr>
         </thead>
-        <tbody>
-            <% trains.forEach(train => { %>
+        <tbody id="trainListBody">
+            <% if (trains && trains.length) { %>
+                <% trains.forEach(train => { %>
+                    <tr>
+                        <td><%= train.train_no %></td>
+                        <td><%= train.name %></td>
+                        <td><%= train.type %></td>
+                        <td><%= train.route_id %></td>
+                        <td><%= train.end1_name %></td>
+                        <td><%= train.end2_name %></td>
+                        <td><%= train.depart %></td>
+                        <td><%= train.arrive %></td>
+                        <td><%= train.direction %></td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
                 <tr>
-                    <td><%= train.train_no %></td>
-                    <td><%= train.name %></td>
-                    <td><%= train.type %></td>
-                    <td><%= train.route_id %></td>
-                    <td><%= train.depart %></td>
-                    <td><%= train.arrive %></td>
-                    <td><%= train.direction %></td>
+                    <td colspan="9" style="text-align: center;">No trains found.</td>
                 </tr>
-            <% }) %>
+            <% } %>
         </tbody>
     </table>
+
+    <script>
+        // Function to load station options
+        function loadStations() {
+            fetch('/stations')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('station1Select').innerHTML = html;
+                    document.getElementById('station2Select').innerHTML = html;
+                })
+                .catch(err => console.error('Error fetching stations:', err));
+        }
+
+        // Call loadStations when the page loads
+        window.onload = loadStations;
+
+        const tableBody = document.getElementById('trainListBody');
+        tableBody.style.display = 'none';
+        document.getElementById('showAllTrainsButton').onclick = function() {
+            tableBody.style.display = 'table-row-group';
+        };
+
+        // Search Button logic
+        document.getElementById('searchButton').onclick = async function () {
+    const trainNo = document.getElementById('trainNo').value; // Get the train number input
+    const sourceStation = document.getElementById('station1Select').value; // Get selected source station
+    const destinationStation = document.getElementById('station2Select').value; // Get selected destination station
+
+    const params = new URLSearchParams();
+    if (trainNo) params.append('trainNo', trainNo); // Append train number if present
+    if (sourceStation) params.append('sourceStation', sourceStation); // Append source station if present
+    if (destinationStation) params.append('destinationStation', destinationStation); // Append destination station if present
+
+    try {
+        // Make fetch request with constructed parameters
+        const response = await fetch(`/trains/search?${params.toString()}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok'); // Check for response status
+        }
+        const trains = await response.json(); // Parse JSON response
+
+        const tableBody = document.getElementById('trainListBody');
+        tableBody.innerHTML = ''; // Clear previous results
+
+        // Check if trains is an array and has results
+        if (Array.isArray(trains) && trains.length > 0) {
+            trains.forEach(train => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${train.train_no}</td>
+                    <td>${train.name}</td>
+                    <td>${train.type}</td>
+                    <td>${train.route_id}</td>
+                    <td>${train.end1_name}</td>
+                    <td>${train.end2_name}</td>
+                    <td>${train.depart}</td>
+                    <td>${train.arrive}</td>
+                    <td>${train.direction}</td>
+                `;
+                tableBody.appendChild(row); // Append new row to table body
+            });
+            tableBody.style.display = 'table-row-group';
+        } else {
+            // Handle case when no trains are found
+            const row = document.createElement('tr');
+            row.innerHTML = `<td colspan="9">No trains found.</td>`;
+            tableBody.appendChild(row);
+            tableBody.style.display = 'table-row-group';
+        }
+    } catch (error) {
+        console.error('Error fetching train data:', error); // Log errors to console
+    }
+};
+
+document.getElementById('addTrainButton').onclick = function() {
+            window.location.href = '/trainForm';
+        };
+
+        document.getElementById('addStopButton').onclick = function() {
+            window.location.href = '/stopform';
+        };
+
+    </script>
 </body>
 </html>

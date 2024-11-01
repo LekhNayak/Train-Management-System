@@ -68,3 +68,103 @@ exports.addTrain = (req, res) => {
         res.send('Train added successfully');
     });
 };
+
+exports.getTrainList = (req, res) => {
+    // SQL query to get trains along with route names
+    const trainQuery = `
+        SELECT t.train_no, t.name, t.type, r.id AS route_id, 
+               s1.name AS end1_name, s2.name AS end2_name, 
+               t.depart, t.arrive, t.direction 
+        FROM train t 
+        JOIN route r ON t.route_id = r.id 
+        JOIN station s1 ON r.end1_id = s1.id 
+        JOIN station s2 ON r.end2_id = s2.id`;
+
+    // Execute the query
+    db.query(trainQuery, (err, trainResults) => {
+        if (err) {
+            console.error('Error fetching train list:', err);
+            return res.status(500).send('Server Error');
+        }
+
+        // Pass the results to the EJS template
+        res.render('trainSelect', { trains: trainResults });
+    });
+};
+
+// Method to search trains
+exports.searchTrains = (req, res) => {
+    const { trainNo, sourceStation, destinationStation } = req.query;
+
+    let query = `
+    SELECT DISTINCT t.train_no, t.name, t.type, r.id AS route_id, 
+           s1.name AS end1_name, s2.name AS end2_name, 
+           t.depart, t.arrive, t.direction 
+    FROM train t 
+    JOIN route r ON t.route_id = r.id 
+    JOIN stops st1 ON t.route_id = st1.route_id  -- For the source station
+    JOIN stops st2 ON t.route_id = st2.route_id  -- For the destination station
+    JOIN station s1 ON r.end1_id = s1.id 
+    JOIN station s2 ON r.end2_id = s2.id
+    WHERE 1=1`;
+
+    const params = [];
+
+    if (trainNo) {
+        query += ' AND t.train_no = ?'; // Use t.train_no to reference the correct table
+        params.push(trainNo);
+    }
+
+    if (sourceStation) {
+        query += ' AND st1.station_id = ?';
+        params.push(sourceStation); // Add source station ID
+    }
+
+    if (destinationStation) {
+        query += ' AND st2.station_id = ?';
+        params.push(destinationStation); // Add destination station ID
+    }
+
+    // Log the query and parameters for debugging
+    console.log('Executing Query:', query);
+    console.log('With Parameters:', params);
+
+    db.query(query, params, (err, results) => {
+        if (err) {
+            console.error('Error fetching trains:', err);
+            return res.status(500).send('Server Error');
+        }
+        res.json(results); // Send back the results as JSON
+    });
+};
+
+
+exports.getStations = (req, res) => {
+    const stationQuery = 'SELECT id, name FROM station'; 
+    db.query(stationQuery, (err, stationResults) => {
+        if (err) {
+            console.error('Error fetching stations:', err);
+            return res.status(500).send('Server Error: Could not fetch stations.');
+        }
+
+        // Map the stations to HTML option elements
+        const stationOptionsHtml = stationResults.map(station => {
+            return `<option value="${station.id}">${station.name}</option>`;
+        }).join('');
+
+        // Read the EJS template file
+        const templatePath = path.join(__dirname, '../views/trainSelect.ejs');
+        fs.readFile(templatePath, 'utf8', (err, html) => {
+            if (err) {
+                console.error('Error reading HTML file:', err);
+                return res.status(500).send('Server Error: Could not load the form.');
+            }
+
+            // Replace placeholder with station options
+            html = html.replace('<!-- Dynamic options will be injected here -->', stationOptionsHtml);
+            
+            // Send the final HTML to the client
+            res.send(html);
+        });
+    });
+};
