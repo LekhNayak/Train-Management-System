@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+h1 {
+    color: #333;
+    margin-top: 20px;
+    font-size: 2rem;
+    text-align: center;
+}
+/* Form and Button Styles */
+div {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 200px;
+}
+
+select{
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#searchButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#addTrainButton, #addStopButton, #showAllTrainsButton {
+    background-color: #208c8d;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#searchButton:hover {
+    background-color: #3e8e41;
+}
+
+/* Table Styles */
+table {
+    width: 80%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #208c8d;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    color: #555;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input[type="text"], button {
+        width: 80%;
+        margin: 5px 0;
+    }
+
+    table {
+        width: 95%;
+    }
+}
+
+.double-arrow{
+    margin-right: -10px;
+    margin-left: -10px;
+}

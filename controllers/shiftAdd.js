@@ -3,19 +3,19 @@ const fs = require('fs');
 const db = require('../db');
 const { error } = require('console');
 
-exports.getStationForm = (req, res) => {
-    const query = 'SELECT zone FROM zones';
+exports.getShiftForm = (req, res) => {
+    const query = 'SELECT id, person.name as name FROM staff join person on person.id = staff.id';
     db.query(query, (err, results) => {
         if (err) {
-            console.error('Error fetching zones:', err);
+            console.error('Error fetching staff:', err);
             return res.status(500).send('Server Error');
         }
 
-        let optionsHtml = results.map(zone => {
-            return `<option value="${zone.zone}">${zone.zone}</option>`;
+        let optionsHtml = results.map(staff => {
+            return `<option value="${staff.id}">${staff.name}</option>`;
         }).join('');
 
-        fs.readFile(path.join(__dirname, '../client/templates/stationaddform.html'), 'utf8', (err, html) => {
+        fs.readFile(path.join(__dirname, '../client/templates/shiftaddform.html'), 'utf8', (err, html) => {
             if (err) {
                 console.error('Error reading HTML file:', err);
                 return res.status(500).send('Server Error');
@@ -82,55 +82,3 @@ exports.addStation = (req, res) => {
 
 };
 
-exports.getStationList = (req, res) => {
-    const query = `
-    SELECT s.id AS station_id, s.name AS station_name, z.zone AS zone_name, d.division AS division_name 
-    FROM station s 
-    JOIN divisions d ON s.division_id = d.id 
-    JOIN zones z ON d.zone_id = z.id
-  `;
-  
-    db.query(query, (err, stationResults) => {
-        if (err) {
-            console.error('Error fetching station list:', err);
-            return res.status(500).send('Server Error');
-        }
-
-        res.render('stationSelect', { stations: stationResults });
-    });
-};
-
-exports.searchStation = (req, res) => {
-    const { zone, division } = req.query;
-
-    // Base query
-    let query = `
-        SELECT s.id as station_id, s.name as station_name, z.zone AS zone_name, d.division AS division_name
-        FROM station s
-        JOIN divisions d ON s.division_id = d.id
-        JOIN zones z ON d.zone_id = z.id
-        WHERE 1=1
-    `;
-    
-    // Parameters array for prepared statement
-    const queryParams = [];
-
-    // Add conditions only if parameters are provided
-    if (zone) {
-        query += ` AND z.zone = ?`;
-        queryParams.push(zone);
-    }
-    if (division) {
-        query += ` AND d.id = ?`;
-        queryParams.push(division);
-    }
-
-    // Execute the query with the parameters
-    db.query(query, queryParams, (err, results) => {
-        if (err) {
-            console.error('Error querying stations:', err);
-            return res.status(500).send('Error querying stations');
-        }
-        res.json(results);
-    });
-};

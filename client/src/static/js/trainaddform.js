@@ -25,3 +25,9 @@ document.getElementById('trainForm').addEventListener('submit', function(event) 
     })
     .catch(error => console.error('Error:', error));
 });
+
+function cancelForm() {
+    document.getElementById('trainForm').reset(); // Reset the form
+    document.getElementById('errorMessage').textContent = ''; // Clear any error messages
+    window.location.href = '/trains'; // Redirect to the desired URL
+}

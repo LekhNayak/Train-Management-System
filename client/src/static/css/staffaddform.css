@@ -1,0 +1,119 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    width: 400px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upper-strap {
+    background-color: #208c8d;
+    color: #fff;
+    padding: 4px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.form-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Use column layout */
+    align-items: flex-start; /* Align items to the start */
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.form-card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-card input{
+    width: 335px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s;
+}
+
+.form-card select {
+    width: 350px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.error-message {
+    color: red;
+    font-size: 15px;
+}
+
+.success-message {
+    color: green;
+    font-size: 15px;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+    border: 2px solid #43cea2;
+    outline: none;
+}
+
+.form-card button {
+    width: auto; /* Change to auto to avoid full-width */
+    padding: 10px 20px; /* Add some horizontal padding */
+    background-color: #208c8d;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    float: right; /* Align the button to the right */
+    margin-top: 10px; /* Add some margin on top */
+}
+
+.form-card button:hover{
+    background-color: #1f7a7b;
+}
+
+.form-card select {
+    width: 350px; /* Ensure it has the desired width */
+    padding: 8px; 
+    margin-bottom: 15px;
+    border: 1px solid #ddd; /* Default border */
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s;
+}
+

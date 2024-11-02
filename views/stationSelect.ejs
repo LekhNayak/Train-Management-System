@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Management</title>
+    <link rel="stylesheet" href="/css/stationSelect.css">
+</head>
+<body>
+    <h1>Station Management</h1>
+    <div>
+        <select id="zoneSelect" name="zone">
+            <option value="">Select Zone</option>
+            <!-- Dynamic options for zones will be injected here -->
+        </select>
+        <select id="divisionSelect" name="division">
+            <option value="">Select Division</option>
+            <!-- Dynamic options for divisions will be injected here based on zone selection -->
+        </select>
+        <button id="searchStationButton">Search Station</button>
+        <button id="addStationButton">Add Station</button>
+        <button id="showAllStationsButton">Show All Stations</button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Station ID</th>
+                <th>Station Name</th>
+                <th>Zone</th>
+                <th>Division</th>
+            </tr>
+        </thead>
+        <tbody id="stationListBody">
+            <% if (stations && stations.length) { %>
+                <% stations.forEach(station => { %>
+                    <tr>
+                        <td><%= station.station_id %></td>
+                        <td><%= station.station_name %></td>
+                        <td><%= station.zone_name %></td>
+                        <td><%= station.division_name %></td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4" style="text-align: center;">No stations found.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <script>
+        // Function to load zones and divisions dynamically
+        function loadZones() {
+            fetch('/stationform')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('zoneSelect').innerHTML = html;
+                })
+                .catch(err => console.error('Error fetching zones:', err));
+        }
+
+        // Load divisions based on selected zone
+        document.getElementById('zoneSelect').onchange = function() {
+    const zone = this.value;
+    fetch(`/get-divisions?zone=${zone}`)
+        .then(response => response.json())
+        .then(divisions => {
+            const divisionSelect = document.getElementById('divisionSelect');
+            divisionSelect.innerHTML = '<option value="">Select Division</option>'; // Reset options
+            
+            // Populate options dynamically
+            divisions.forEach(division => {
+                const option = document.createElement('option');
+                option.value = division.id;
+                option.textContent = division.name;
+                divisionSelect.appendChild(option);
+            });
+        })
+        .catch(err => console.error('Error fetching divisions:', err));
+};
+
+
+        // Call loadZones when the page loads
+        window.onload = loadZones;
+
+        const tableBody = document.getElementById('stationListBody');
+        tableBody.style.display = 'none';
+        document.getElementById('showAllStationsButton').onclick = function() {
+            tableBody.style.display = 'table-row-group';
+        };
+
+        // Search Button logic for stations
+        document.getElementById('searchStationButton').onclick = async function () {
+    const zone = document.getElementById('zoneSelect').value;
+    const division = document.getElementById('divisionSelect').value;
+
+    const params = new URLSearchParams();
+    if (zone) params.append('zone', zone);
+    if (division) params.append('division', division);
+
+    try {
+        const response = await fetch(`/station/search?${params.toString()}`);
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const stations = await response.json();
+        const tableBody = document.getElementById('stationListBody');
+        tableBody.innerHTML = '';
+
+        if (stations.length > 0) {
+            stations.forEach(station => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${station.station_id}</td>
+                    <td>${station.station_name}</td>
+                    <td>${station.zone_name}</td>
+                    <td>${station.division_name}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            tableBody.style.display = 'table-row-group';
+        } else {
+            tableBody.innerHTML = `<tr><td colspan="4">No stations found.</td></tr>`;
+        }
+    } catch (error) {
+        console.error('Error fetching station data:', error);
+    }
+};
+
+
+        document.getElementById('addStationButton').onclick = function() {
+            window.location.href = '/stationform';
+        };
+    </script>
+</body>
+</html>

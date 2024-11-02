@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Shift</title>
+    <link rel="stylesheet" href="/css/shiftaddform.css" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="upper-strap">
+            <h4>Add Staff</h4>
+        </div>
+        <div class="form-card">
+            <form id="staffForm" action="/add-staff" method="post">
+                <label for="staffSelect">Staff:</label>
+                <select id="staffSelect" name="staff">
+                    <option value="" class="option">Select Staff</option>
+                    <!-- Dynamic options will be injected here -->
+                </select>
+
+                <label for="trainSelect">Train:</label>
+                <select id="trainSelect" name="train">
+                    <option value="" class="option">Select Train</option>
+                    <!-- Dynamic options will be injected here -->
+                </select>
+
+                <label for="shiftStart">Shift start time:</label>
+                <input type="text" id="shiftStart" name="shiftStart" required />
+
+                <label for="shiftEnd">Shift start time:</label>
+                <input type="text" id="shiftEnd" name="shiftEnd" required />
+
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="button-container">
+                    <button type="submit">Done</button>
+                    <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                </div>
+
+    
+            </form>
+        </div>
+    </div>
+    <script src="/js/shiftaddform.js"></script>
+</body>
+</html>

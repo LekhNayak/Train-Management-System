@@ -1,6 +1,6 @@
 // client/js/login.js
 document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            window.location.href = '/stationform'; // Redirect on successful login
+            window.location.href = '/station'; // Redirect on successful login
         } else {
             errorMessage.textContent = data.message; // Display error message
         }

@@ -99,5 +99,5 @@ fetch('/stationform')
 function cancelForm() {
     document.getElementById('stationForm').reset(); // Reset the form
     document.getElementById('errorMessage').textContent = ''; // Clear any error messages
-    window.location.href = '/'; // Redirect to the desired URL
+    window.location.href = '/station'; // Redirect to the desired URL
 }

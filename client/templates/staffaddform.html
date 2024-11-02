@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Station</title>
+    <link rel="stylesheet" href="/css/staffaddform.css" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="upper-strap">
+            <h4>Add Staff</h4>
+        </div>
+        <div class="form-card">
+            <form id="staffForm" action="/add-staff" method="post">
+                <label for="staffId">Staff ID:</label>
+                <input type="text" id="staffId" name="staffId" required />
+
+                <label for="name">Staff Name:</label>
+                <input type="text" id="name" name="name" required />
+
+                <label for="role">Select Role:</label>
+                <select id="roleSelect" name="role">
+                    <option value="" class="option" selected disabled></option>
+                    <option value="Locopilot" class="option">Locopilot</option>
+                    <option value="Attendant" class="option">Attendant</option>
+                    <option value="Ticket Collector" class="option">Ticket Collector</option>
+                    <option value="Policemen" class="option">Policemen</option>
+                </select>
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required />
+        
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="button-container">
+                    <button type="submit">Done</button>
+                    <button type="button" is="cancelButton" onclick="cancelForm()">Cancel</button>
+                </div>
+
+    
+            </form>
+        </div>
+    </div>
+    <script src="/js/staffaddform.js"></script>
+</body>
+</html>
