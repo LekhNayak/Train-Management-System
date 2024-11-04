@@ -159,3 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 });
+
+function cancelForm() {
+    document.getElementById('stopForm').reset(); // Reset the form
+    document.getElementById('errorMessage').textContent = ''; // Clear any error messages
+    window.location.href = '/trains'; // Redirect to the desired URL
+}

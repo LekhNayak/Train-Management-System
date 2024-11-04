@@ -46,12 +46,12 @@ button {
     transition: background-color 0.3s ease;
 }
 
-#searchButton {
+#searchStationButton {
     background-color: #4CAF50;
     color: white;
 }
 
-#addTrainButton, #addStopButton, #showAllTrainsButton {
+#addStationButton, #addZoneButton, #showAllStationsButton, #addDivisionButton {
     background-color: #208c8d;
     color: white;
 }
@@ -60,7 +60,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-#searchButton:hover {
+#searchStationButton:hover {
     background-color: #3e8e41;
 }
 

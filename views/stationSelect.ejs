@@ -17,8 +17,10 @@
             <option value="">Select Division</option>
             <!-- Dynamic options for divisions will be injected here based on zone selection -->
         </select>
-        <button id="searchStationButton">Search Station</button>
+        <button id="searchStationButton">Search</button>
         <button id="addStationButton">Add Station</button>
+        <button id="addZoneButton">Add Zone</button>
+        <button id="addDivisionButton">Add Division</button>
         <button id="showAllStationsButton">Show All Stations</button>
     </div>
     
@@ -130,6 +132,12 @@
 
         document.getElementById('addStationButton').onclick = function() {
             window.location.href = '/stationform';
+        };
+        document.getElementById('addZoneButton').onclick = function() {
+            window.location.href = '/zoneform';
+        };
+        document.getElementById('addDivisionButton').onclick = function() {
+            window.location.href = '/divisionform';
         };
     </script>
 </body>
